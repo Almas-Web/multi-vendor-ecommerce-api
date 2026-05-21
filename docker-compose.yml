@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: multi_vendor_ecommerce_api_db
+    restart: always
+
+    environment:
+      POSTGRES_USER: dummy
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: multi_vendor_ecommerce_db
+
+    ports:
+      - "5460:5432"   # host:container
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
