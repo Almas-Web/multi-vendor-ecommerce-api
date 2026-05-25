@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from apis.v1 import address, auth, payment, user, admin, vendor,product,category,cart,cart_item,order,order_item,checkout
+from apis.v1 import address, auth, payment, product_image, user, admin, vendor,product,category,cart,cart_item,order,order_item,checkout
 
 
 api_router = APIRouter()
@@ -28,3 +28,5 @@ api_router.include_router(payment.router,prefix="/payments",
                           tags=["payments"])
 api_router.include_router(address.router,prefix="/addresses",
                           tags=["addresses"])
+api_router.include_router(product_image.router,prefix="/product-images",
+                          tags=["product-images"])

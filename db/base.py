@@ -8,3 +8,4 @@ from db.models.order_item import OrderItem
 from db.models.category import Category
 from db.models.payment import Payment
 from db.models.address import Address
+from db.models.product_image import ProductImage

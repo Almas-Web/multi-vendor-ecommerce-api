@@ -120,3 +120,4 @@
 |------|-------------|
 | Project Type | Learning + Production-ready backend |
 | Status | Actively improving step-by-step |
+Copy `.env.example` to `.env` and update values.

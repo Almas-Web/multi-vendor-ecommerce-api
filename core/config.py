@@ -1,28 +1,38 @@
-import os
-from dotenv import load_dotenv
-from pathlib import Path
-
-env_path = Path('.') / '.env'
-load_dotenv(dotenv_path=env_path)
+from pydantic import Extra
+from pydantic_settings import BaseSettings
 
 
-class Settings:
+class Settings(BaseSettings):
+
     PROJECT_NAME: str = "Multi Vendor Ecommerce API"
     PROJECT_VERSION: str = "1.0.0"
 
-    POSTGRES_USER: str = os.getenv("POSTGRES_USER")
-    POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
 
-    POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "localhost")
+    POSTGRES_SERVER: str = "localhost"
+    POSTGRES_PORT: str = "5432"
 
-    POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", 5432)  # default postgres port is 5432
+    POSTGRES_DB: str = "multi_vendor_ecommerce_db"
 
-    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "multi_vendor_ecommerce_db")
+    SECRET_KEY: str
 
-    DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 300
 
-    SECRET_KEY: str = os.getenv("SECRET_KEY")
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 5
-    REFRESH_TOKEN_EXPIRE_MINUTES: int = 15
     JWT_ALGORITHM: str = "HS256"
+
+    @property
+    def DATABASE_URL(self) -> str:
+
+        return (
+            f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
+            f"@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+        )
+
+    class Config:
+        env_file = ".env"
+        extra = Extra.forbid
+
+
 settings = Settings()
