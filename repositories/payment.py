@@ -11,9 +11,7 @@ class PaymentRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    # ----------------------
     # CREATE PAYMENT (SAFE)
-    # ----------------------
     def create_payment(self, order_id: int, user_id: int, amount: float):
 
         order = (
@@ -25,11 +23,11 @@ class PaymentRepository:
         if not order:
             raise HTTPException(status_code=404, detail="Order not found")
 
-        # 🔒 ownership check
+        #  ownership check
         if order.user_id != user_id:
             raise HTTPException(status_code=403, detail="Not allowed")
 
-        # 🔒 prevent duplicate payment
+        #  prevent duplicate payment
         existing_payment = (
             self.db.query(Payment)
             .filter(Payment.order_id == order_id)
@@ -39,7 +37,7 @@ class PaymentRepository:
         if existing_payment:
             raise HTTPException(status_code=400, detail="Payment already exists")
 
-        # 🔒 amount validation
+        #  amount validation
         if float(amount) != float(order.total_price):
             raise HTTPException(status_code=400, detail="Invalid payment amount")
 

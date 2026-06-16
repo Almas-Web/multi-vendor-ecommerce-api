@@ -4,23 +4,17 @@ from db.models.user import User
 from db.models.product import Product
 
 
-# =========================
 # ROLE CHECK: ADMIN
-# =========================
 def is_admin(user: User) -> bool:
     return user.is_superuser
 
 
-# =========================
 # ROLE CHECK: PRODUCT OWNER
-# =========================
 def is_product_owner(user: User, product: Product) -> bool:
     return product.author_id == user.id
 
 
-# =========================
 # PRODUCT ACCESS CONTROL
-# =========================
 def require_product_access(user: User, product: Product):
     """
     Admin can access everything
@@ -34,9 +28,7 @@ def require_product_access(user: User, product: Product):
         )
 
 
-# =========================
 # IMAGE ACCESS CONTROL
-# =========================
 def require_image_access(user: User, product: Product):
     """
     Image access depends on product ownership
@@ -51,9 +43,7 @@ def require_image_access(user: User, product: Product):
         )
 
 
-# =========================
 # OPTIONAL: ADMIN ONLY ACCESS
-# =========================
 def require_admin(user: User):
     if not user.is_superuser:
         raise HTTPException(

@@ -3,9 +3,7 @@ from pydantic import BaseModel, Field, EmailStr
 from fastapi import HTTPException, status
 
 
-# =========================================================
-# 🆕 USER CREATE (SAFE VERSION)
-# =========================================================
+#  USER CREATE 
 class UserCreate(BaseModel):
     email: str
     password: str = Field(..., min_length=4)
@@ -25,9 +23,7 @@ class UserCreate(BaseModel):
                 )
 
 
-# =========================================================
-# 👤 USER RESPONSE MODEL
-# =========================================================
+#  USER RESPONSE MODEL
 class UserView(BaseModel):
     id: int
     email: EmailStr
@@ -39,17 +35,15 @@ class UserView(BaseModel):
         from_attributes = True
 
 
-# =========================================================
-# 🔐 TOKEN RESPONSE
-# =========================================================
+
+#  TOKEN RESPONSE
+
 class Token(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
-
-# =========================
+    
 # ROLE UPDATE SCHEMA
-# =========================
 class UserRoleUpdate(BaseModel):
     is_vendor: bool = False
     is_superuser: bool = False

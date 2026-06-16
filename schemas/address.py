@@ -3,9 +3,7 @@ from typing import Optional
 from datetime import datetime
 
 
-# -------------------------
 # CREATE
-# -------------------------
 class AddressCreate(BaseModel):
     full_name: str
     phone: str
@@ -17,9 +15,7 @@ class AddressCreate(BaseModel):
     is_default: bool = False
 
 
-# -------------------------
 # UPDATE
-# -------------------------
 class AddressUpdate(BaseModel):
     full_name: Optional[str] = None
     phone: Optional[str] = None
@@ -31,9 +27,7 @@ class AddressUpdate(BaseModel):
     is_default: Optional[bool] = None
 
 
-# -------------------------
 # READ
-# -------------------------
 class AddressRead(BaseModel):
     id: int
     full_name: str

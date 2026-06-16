@@ -1,5 +1,4 @@
-from pydantic import Extra
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -22,17 +21,30 @@ class Settings(BaseSettings):
 
     JWT_ALGORITHM: str = "HS256"
 
+    # =========================
+    # EMAIL SETTINGS (IMPORTANT)
+    # =========================
+    EMAIL_HOST: str = "smtp.gmail.com"
+    EMAIL_PORT: int = 587
+    EMAIL_USERNAME: str | None = None
+    EMAIL_PASSWORD: str | None = None
+    EMAIL_FROM: str | None = None
+    EMAIL_PROVIDER: str = "gmail"
+
     @property
     def DATABASE_URL(self) -> str:
-
         return (
-            f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
-            f"@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+            f"postgresql://{self.POSTGRES_USER}:"
+            f"{self.POSTGRES_PASSWORD}@"
+            f"{self.POSTGRES_SERVER}:"
+            f"{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
         )
 
-    class Config:
-        env_file = ".env"
-        extra = Extra.forbid
+    # ✅ Pydantic v2 config
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        extra="forbid"
+    )
 
 
 settings = Settings()

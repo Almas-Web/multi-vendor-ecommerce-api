@@ -10,9 +10,7 @@ class ProductImageRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    # =========================
     # CREATE IMAGE
-    # =========================
     def create_image(self, product_id: int, image_url: str):
 
         image = ProductImage(
@@ -26,9 +24,7 @@ class ProductImageRepository:
 
         return image
 
-    # =========================
     # GET ALL IMAGES BY PRODUCT
-    # =========================
     def get_images(self, product_id: int):
 
         return (
@@ -37,9 +33,7 @@ class ProductImageRepository:
             .all()
         )
 
-    # =========================
     # GET SINGLE IMAGE
-    # =========================
     def get_image(self, image_id: int):
 
         image = (
@@ -53,9 +47,7 @@ class ProductImageRepository:
 
         return image
 
-    # =========================
     # DELETE IMAGE
-    # =========================
     def delete_image(self, image_id: int):
 
         image = self.get_image(image_id)

@@ -5,9 +5,7 @@ from slugify import slugify
 import time
 
 
-# -------------------------
 # CREATE SCHEMA
-# -------------------------
 class CategoryCreate(BaseModel):
     name: str
     is_active: bool = True
@@ -25,9 +23,7 @@ class CategoryCreate(BaseModel):
             self.slug = self.create_slug(self.name)
 
 
-# -------------------------
 # UPDATE SCHEMA
-# -------------------------
 class CategoryUpdate(BaseModel):
     name: Optional[str] = None
     is_active: Optional[bool] = None
@@ -45,9 +41,9 @@ class CategoryUpdate(BaseModel):
             self.slug = self.create_slug(self.name)
 
 
-# -------------------------
+
 # READ SCHEMA
-# -------------------------
+
 class CategoryRead(BaseModel):
     id: int
     slug: str
@@ -58,9 +54,7 @@ class CategoryRead(BaseModel):
         from_attributes = True
 
 
-# -------------------------
 # PAGINATION SCHEMA
-# -------------------------
 class CategoryPagination(BaseModel):
     total_count: int
     skip: int

@@ -16,9 +16,7 @@ class ProductRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    # -------------------------
     # CREATE PRODUCT
-    # -------------------------
     def create_product(self, product: ProductCreate, author_id: int) -> Product:
         """
         Create a new product in the database.
@@ -45,9 +43,7 @@ class ProductRepository:
 
         return db_product
 
-    # -------------------------
     # GET PRODUCTS (PAGINATION)
-    # -------------------------
     def get_products(self, skip: int = 0, limit: int = 1000):
 
         total_count = self.db.query(func.count(Product.id)).scalar()
@@ -67,9 +63,7 @@ class ProductRepository:
             data=products
         )
 
-    # -------------------------
     # GET SINGLE PRODUCT
-    # -------------------------
     def get_product(self, product_id: int) -> Product:
 
         return (
@@ -78,9 +72,7 @@ class ProductRepository:
             .first()
         )
 
-    # -------------------------
     # UPDATE PRODUCT
-    # -------------------------
     def update_product(
         self,
         product_id: int,
@@ -97,9 +89,7 @@ class ProductRepository:
         if not db_product:
             raise HTTPException(status_code=404, detail="Product not found!")
 
-        # =========================
         # OWNER/VENDOR SECURITY
-        # =========================
         if (
             db_product.author_id != current_user.id
             and not current_user.is_superuser
@@ -132,9 +122,7 @@ class ProductRepository:
 
         return db_product
 
-    # -------------------------
     # DELETE PRODUCT
-    # -------------------------
     def delete_product(
         self,
         product_id: int,
@@ -150,9 +138,7 @@ class ProductRepository:
         if not db_product:
             raise HTTPException(status_code=404, detail="Product not found!")
 
-        # =========================
         # OWNER/VENDOR SECURITY
-        # =========================
         if (
             db_product.author_id != current_user.id
             and not current_user.is_superuser

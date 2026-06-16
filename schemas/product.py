@@ -7,9 +7,7 @@ import time
 from schemas.user import UserView
 
 
-# -------------------------
 # CREATE SCHEMA
-# -------------------------
 class ProductCreate(BaseModel):
     title: str
     price: int
@@ -17,7 +15,6 @@ class ProductCreate(BaseModel):
     is_active: bool = True
     slug: Optional[str] = None
 
-    # image_url: Optional[str] = None  # (COMMENTED FOR NOW - ADD LATER)
 
     @classmethod
     def create_slug(cls, title: str) -> str:
@@ -31,9 +28,7 @@ class ProductCreate(BaseModel):
             self.slug = self.create_slug(self.title)
 
 
-# -------------------------
 # UPDATE SCHEMA
-# -------------------------
 class ProductUpdate(BaseModel):
     title: Optional[str] = None
     price: Optional[int] = None
@@ -41,7 +36,6 @@ class ProductUpdate(BaseModel):
     is_active: Optional[bool] = None
     slug: Optional[str] = None
 
-    # image_url: Optional[str] = None  # (COMMENTED FOR NOW - ADD LATER)
 
     @classmethod
     def create_slug(cls, title: str) -> str:
@@ -55,9 +49,7 @@ class ProductUpdate(BaseModel):
             self.slug = self.create_slug(self.title)
 
 
-# -------------------------
 # READ SCHEMA
-# -------------------------
 class ProductRead(BaseModel):
     id: int
     slug: str
@@ -66,15 +58,12 @@ class ProductRead(BaseModel):
     created_at: datetime
     author: UserView
 
-    # image_url: Optional[str] = None  # (COMMENTED FOR FUTURE USE)
 
     class Config:
         from_attributes = True
 
 
-# -------------------------
 # PAGINATION SCHEMA
-# -------------------------
 class ProductPagination(BaseModel):
     total_count: int
     skip: int
@@ -85,9 +74,7 @@ class ProductPagination(BaseModel):
         from_attributes = True
 
 
-# -------------------------
 # PRODUCT PROFILE VIEW
-# -------------------------
 class ProductProfileView(BaseModel):
     id: int
     title: str
@@ -95,7 +82,6 @@ class ProductProfileView(BaseModel):
     stock: int
     is_active: bool
 
-    # image_url: Optional[str] = None  # (COMMENTED FOR FUTURE USE)
 
     class Config:
         from_attributes = True

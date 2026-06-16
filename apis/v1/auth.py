@@ -8,6 +8,7 @@ from repositories.user import UserRepository
 from schemas.user import UserCreate, UserView, Token
 
 from utils.jwt_manager import create_access_token, create_refresh_token, verify_token
+from utils.email_manager.email import send_email
 
 router = APIRouter()
 
@@ -36,10 +37,20 @@ def create_user(
     new_user = user_repo.create_user(
         email=payload.email,
         password=payload.password,
-
-        # 🔐 SECURITY FIX: roles controlled by backend only
         is_vendor=False,
         is_superuser=False
+    )
+
+    # =========================
+    # 📧 SEND WELCOME EMAIL (NEW ADD)
+    # =========================
+    send_email(
+        to_email=payload.email,
+        subject="Welcome to Multi Vendor Ecommerce API🚀",
+        template_name="welcome.html",
+        context={
+            "username": payload.email.split("@")[0]
+        }
     )
 
     return new_user

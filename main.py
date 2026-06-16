@@ -13,9 +13,7 @@ import os
 from utils.const import UPLOAD_FOLDER
 
 
-# =========================
 # CREATE APP
-# =========================
 def start_application():
 
     app = FastAPI(
@@ -29,36 +27,28 @@ def start_application():
 app = start_application()
 
 
-# =========================
 # CORS SETUP
-# =========================
 
-# List of allowed origins, you can add specific domains or '*' for all origins
 origins = [
     "http://localhost:3000",  # Frontend during development
     "https://your-frontend-domain.com",  # Production frontend
-    "*",  # Allow all origins (use cautiously)
+    "*",  
 ]
 
-# Adding CORSMiddleware to the FastAPI app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # List of allowed origins
-    allow_credentials=True,  # Allow cookies and credentials to be sent
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Allowed HTTP methods
-    allow_headers=["*"],  # Allowed headers
+    allow_origins=origins,  
+    allow_credentials=True,  
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"], 
 )
 
 
-# =========================
 # INCLUDE ROUTES
-# =========================
 app.include_router(api_router)
 
 
-# =========================
 # STATIC FILES SETUP
-# =========================
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app.mount(
@@ -68,17 +58,13 @@ app.mount(
 )
 
 
-# =========================
 # HOME ROUTE
-# =========================
 @app.get("/")
 def home():
     return {"msg": "Hello World"}
 
 
-# =========================
 # PROTECTED ROUTE
-# =========================
 @app.get("/protected")
 async def protected_route(
     current_user: User = Depends(UserRepository.get_current_user)

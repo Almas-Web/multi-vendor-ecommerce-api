@@ -15,7 +15,7 @@ from utils.password_manager import PasswordManager
 from utils.jwt_manager import verify_token
 
 
-# 🔐 OAuth2 scheme (Swagger login support)
+#  OAuth2 scheme (Swagger login support)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 
@@ -23,9 +23,9 @@ class UserRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    # =========================================================
-    # 🔍 GET USER BY EMAIL
-    # =========================================================
+
+    # GET USER BY EMAIL
+
     def get_user_by_email(self, email: str) -> Optional[User]:
         return (
             self.db.query(User)
@@ -33,9 +33,9 @@ class UserRepository:
             .first()
         )
 
-    # =========================================================
-    # 🆕 CREATE USER (REGISTER)
-    # =========================================================
+
+    #  CREATE USER (REGISTER)
+
     def create_user(
         self,
         email: str,
@@ -45,10 +45,10 @@ class UserRepository:
         is_vendor: bool = False
     ) -> User:
 
-        # 🔐 hash password
+        #  hash password
         hashed_password = PasswordManager.get_password_hash(password)
 
-        # 🧾 create user object
+        
         db_user = User(
             email=email,
             password=hashed_password,
@@ -82,9 +82,7 @@ class UserRepository:
             .first()
         )
 
-    # =========================================================
-    # 🔐 LOGIN CHECK (FOR /TOKEN)
-    # =========================================================
+    #  LOGIN CHECK (FOR /TOKEN)
     def get_user_for_token(self, email: str, password: str) -> Optional[User]:
 
         user = self.get_user_by_email(email)
@@ -108,9 +106,7 @@ class UserRepository:
 
         return user
 
-    # =========================================================
-    # 🔐 CURRENT USER FROM JWT TOKEN
-    # =========================================================
+    #  CURRENT USER FROM JWT TOKEN
     @staticmethod
     def get_current_user(
         token: str = Depends(oauth2_scheme),
@@ -137,9 +133,8 @@ class UserRepository:
 
         return user
     
-        # =========================
+        
     # UPDATE USER ROLE
-    # =========================
     def update_user_role(
         self,
         user_id: int,
@@ -168,9 +163,4 @@ class UserRepository:
 
         except IntegrityError:
             self.db.rollback()
-            raise HTTPException(
-                status_code=400,
-                detail="Role update failed"
-            )
-
-    
+            raise HTTPException
