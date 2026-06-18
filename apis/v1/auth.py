@@ -13,9 +13,7 @@ from utils.email_manager.email import send_email
 router = APIRouter()
 
 
-# =========================================================
-# 🆕 REGISTER USER (SECURE VERSION)
-# =========================================================
+#  REGISTER USER (SECURE VERSION)
 @router.post("", response_model=UserView)
 def create_user(
     payload: UserCreate,
@@ -24,7 +22,7 @@ def create_user(
 
     user_repo = UserRepository(db=db)
 
-    # 🔍 check existing user
+    # check existing user
     existing_user = user_repo.get_user_by_email(email=payload.email)
 
     if existing_user:
@@ -33,7 +31,7 @@ def create_user(
             detail="Email already registered"
         )
 
-    # 🆕 create user (ROLE FIXED - NO USER INPUT ROLE)
+    # create user (ROLE FIXED - NO USER INPUT ROLE)
     new_user = user_repo.create_user(
         email=payload.email,
         password=payload.password,
@@ -41,9 +39,7 @@ def create_user(
         is_superuser=False
     )
 
-    # =========================
-    # 📧 SEND WELCOME EMAIL (NEW ADD)
-    # =========================
+    #  SEND WELCOME EMAIL (NEW ADD)
     send_email(
         to_email=payload.email,
         subject="Welcome to Multi Vendor Ecommerce API🚀",
@@ -56,9 +52,7 @@ def create_user(
     return new_user
 
 
-# =========================================================
-# 🔐 LOGIN -> TOKEN
-# =========================================================
+#  LOGIN -> TOKEN
 @router.post("/token", response_model=Token)
 async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
@@ -84,9 +78,7 @@ async def login_for_access_token(
     )
 
 
-# =========================================================
-# 🔄 REFRESH TOKEN
-# =========================================================
+# REFRESH TOKEN
 @router.post("/refresh", response_model=Token)
 async def refresh_access_token(
     refresh_token: str,

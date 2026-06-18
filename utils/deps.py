@@ -9,7 +9,7 @@ from utils.jwt_manager import verify_token
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 
-# 👤 GET CURRENT USER
+#  GET CURRENT USER
 def get_current_user(
     token: str = Depends(oauth2_scheme),
     db: Session = Depends(get_db)
@@ -33,7 +33,7 @@ def get_current_user(
     return user
 
 
-# 👤 ACTIVE USER
+#  ACTIVE USER
 def get_current_active_user(
     current_user=Depends(get_current_user)
 ):
@@ -46,7 +46,7 @@ def get_current_active_user(
     return current_user
 
 
-# 👑 ADMIN ONLY
+#  ADMIN ONLY
 def get_current_admin_user(
     current_user=Depends(get_current_active_user)
 ):
@@ -59,7 +59,7 @@ def get_current_admin_user(
     return current_user
 
 
-# 🛍️ VENDOR ONLY
+#  VENDOR ONLY
 def get_current_vendor_user(
     current_user=Depends(get_current_active_user)
 ):

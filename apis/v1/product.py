@@ -27,9 +27,7 @@ router = APIRouter()
 UPLOAD_FOLDER = "uploads/images"
 
 
-# =========================
 # CREATE PRODUCT
-# =========================
 @router.post("", response_model=ProductRead)
 def create_product(
     payload: ProductCreate,
@@ -46,9 +44,7 @@ def create_product(
     return new_product
 
 
-# =========================
 # GET PRODUCTS
-# =========================
 @router.get("", response_model=ProductPagination)
 def get_products(
     skip: int = 0,
@@ -62,9 +58,7 @@ def get_products(
     return products
 
 
-# =========================
 # GET SINGLE PRODUCT
-# =========================
 @router.get("/{product_id}", response_model=ProductRead)
 def get_product(
     product_id: int,
@@ -83,9 +77,7 @@ def get_product(
     return product
 
 
-# =========================
 # UPDATE PRODUCT
-# =========================
 @router.put("/{product_id}")
 def update_product(
     product_id: int,
@@ -106,9 +98,7 @@ def update_product(
     }
 
 
-# =========================
 # DELETE PRODUCT
-# =========================
 @router.delete("/{product_id}")
 def delete_product(
     product_id: int,
@@ -126,9 +116,3 @@ def delete_product(
         "success": "Product deleted successfully"
     }
 
-"""
-# =========================
-# IMAGE UPLOAD ROUTE
-# =========================
-# KEEP UNCHANGED
-"""

@@ -1,123 +1,271 @@
 # 🛒 Multi Vendor E-Commerce API (FastAPI)
 
-| Section | Details |
-|--------|---------|
-| 🚀 Project Name | Multi Vendor E-Commerce API |
-| 🧠 Type | Backend REST API |
-| ⚙️ Framework | FastAPI |
-| 🗄️ Database | PostgreSQL |
-| 🔐 Auth | JWT Authentication |
-| 🧩 ORM | SQLAlchemy |
-| 📦 Migration | Alembic |
+A production-ready Multi Vendor E-Commerce Backend API built with FastAPI, PostgreSQL, SQLAlchemy, and JWT Authentication.
+
+---
+
+## 🚀 Project Overview
+
+| Section          | Details                     |
+| ---------------- | --------------------------- |
+| Project Name     | Multi Vendor E-Commerce API |
+| Type             | Backend REST API            |
+| Framework        | FastAPI                     |
+| Database         | PostgreSQL                  |
+| ORM              | SQLAlchemy                  |
+| Authentication   | JWT                         |
+| Validation       | Pydantic                    |
+| Migration        | Alembic                     |
+| Containerization | Docker & Docker Compose     |
 
 ---
 
 ## 🚀 Features
 
-| Module | Features |
-|--------|----------|
-| 🔐 Authentication | JWT login, register, role-based access (admin/vendor/user) |
-| 👤 User System | User profile & current user |
-| 🛍️ Product System | CRUD, stock management, active/inactive products |
-| 🛒 Cart System | Add / update / delete cart items, stock validation |
-| 🧾 Checkout System | Cart → Order conversion with stock deduction |
-| 📦 Order System | Order creation, status tracking, order items |
-| 💳 Payment System | Payment creation, transaction ID, admin confirmation |
-| 🏠 Address System | Multiple addresses, default address support |
+### 🔐 Authentication & Authorization
+
+* User Registration
+* User Login
+* JWT Authentication
+* Role-Based Access Control (Admin / Vendor / User)
+
+### 👤 User Management
+
+* User Profile
+* Current User Endpoint
+* User Role Management
+
+### 🛍️ Product Management
+
+* Create Product
+* Update Product
+* Delete Product
+* Product Listing
+* Product Stock Management
+* Active / Inactive Product Support
+
+### 🛒 Cart System
+
+* Add Items to Cart
+* Update Cart Quantity
+* Remove Cart Items
+* Stock Validation
+
+### 🧾 Checkout System
+
+* Convert Cart into Order
+* Automatic Stock Deduction
+* Order Generation
+
+### 📦 Order Management
+
+* Order Creation
+* Order Details
+* Order Status Update
+* Order Item Management
+
+### 💳 Payment System
+
+* Payment Creation
+* Transaction ID Support
+* Admin Payment Confirmation
+* Payment Status Tracking
+
+### 🏠 Address Management
+
+* Multiple Addresses
+* Default Address Support
+* CRUD Operations
+
+### 📧 Email Notification System
+
+* Welcome Email on Registration
+* HTML Email Templates
+* SMTP Email Support
+* Reusable Email Manager
+
+### 🐳 Docker Support
+
+* Docker Configuration
+* Docker Compose Setup
+* Environment Variable Support
+* Easy Deployment
 
 ---
 
 ## 🏗️ Tech Stack
 
-| Layer | Technology |
-|------|------------|
-| Backend | FastAPI |
-| Database | PostgreSQL |
-| ORM | SQLAlchemy |
-| Migration | Alembic |
-| Authentication | JWT |
-| Validation | Pydantic |
+| Layer            | Technology |
+| ---------------- | ---------- |
+| Backend          | FastAPI    |
+| Database         | PostgreSQL |
+| ORM              | SQLAlchemy |
+| Authentication   | JWT        |
+| Validation       | Pydantic   |
+| Migration        | Alembic    |
+| Email            | SMTP       |
+| Containerization | Docker     |
 
 ---
 
 ## 📁 Project Structure
 
-| Folder | Purpose |
-|--------|--------|
-| db/ | Database models |
-| repositories/ | Business logic |
-| apis/ | API routes |
-| schemas/ | Pydantic schemas |
-| utils/ | Helper functions |
-| alembic/ | Database migrations |
+```text
+multi_vendor_ecommerce_api/
+│
+├── alembic/
+├── apis/
+├── core/
+├── db/
+├── repositories/
+├── schemas/
+├── templates/
+├── uploads/
+├── utils/
+│   └── email_manager/
+├── .env.example
+├── docker-compose.yml
+├── requirements.txt
+└── main.py
+```
 
 ---
 
 ## ⚙️ Installation
 
-| Step | Command |
-|------|--------|
-| 1️⃣ Clone Repo | ```bash git clone https://github.com/your-username/multi-vendor-ecommerce-api.git ``` |
-| 2️⃣ Go to Project | ```bash cd multi-vendor-ecommerce-api ``` |
-| 3️⃣ Create Virtual Environment | ```bash python -m venv venv ``` |
-| 4️⃣ Activate (Windows) | ```bash venv\Scripts\activate ``` |
-| 5️⃣ Install Dependencies | ```bash pip install -r requirements.txt ``` |
-| 6️⃣ Setup Environment | Create `.env` file: <br> ```env DATABASE_URL=postgresql://user:password@localhost/dbname SECRET_KEY=your_secret_key ALGORITHM=HS256 ACCESS_TOKEN_EXPIRE_MINUTES=60 ``` |
-| 7️⃣ Run Migrations | ```bash alembic upgrade head ``` |
-| 8️⃣ Start Server | ```bash uvicorn main:app --reload ``` |
+### Clone Repository
+
+```bash
+git clone https://github.com/your-username/multi-vendor-ecommerce-api.git
+cd multi-vendor-ecommerce-api
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Environment
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Linux / Mac:
+
+```bash
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Setup Environment Variables
+
+Copy:
+
+```bash
+cp .env.example .env
+```
+
+Update values inside `.env`.
+
+### Run Database Migration
+
+```bash
+alembic upgrade head
+```
+
+### Run Application
+
+```bash
+uvicorn main:app --reload
+```
+
+---
+
+## 🐳 Docker Setup
+
+Build and Run:
+
+```bash
+docker-compose up --build
+```
+
+Run in Background:
+
+```bash
+docker-compose up -d
+```
+
+Stop Containers:
+
+```bash
+docker-compose down
+```
 
 ---
 
 ## 🔑 Environment Variables
 
-| Variable | Value |
-|----------|-------|
-| DATABASE_URL | postgresql://user:password@localhost/db |
-| SECRET_KEY | your_secret_key |
-| ALGORITHM | HS256 |
-| ACCESS_TOKEN_EXPIRE_MINUTES | 60 |
+```env
+DATABASE_URL=
+SECRET_KEY=
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_FROM=
+MAIL_PORT=
+MAIL_SERVER=
+MAIL_STARTTLS=True
+MAIL_SSL_TLS=False
+```
 
 ---
 
-## 📌 API Endpoints
+## 📌 Main API Modules
 
-| Module | Endpoints |
-|--------|----------|
-| Auth | `/auth/register`, `/auth/login` |
-| Products | `/products` |
-| Cart | `/cart-items` |
-| Checkout | `/checkout` |
-| Orders | `/orders`, `/orders/{id}/status` |
-| Payments | `/payments`, `/payments/{id}/success` |
-| Address | `/addresses` |
+| Module    | Endpoint    |
+| --------- | ----------- |
+| Auth      | /auth       |
+| Users     | /users      |
+| Products  | /products   |
+| Cart      | /cart-items |
+| Checkout  | /checkout   |
+| Orders    | /orders     |
+| Payments  | /payments   |
+| Addresses | /addresses  |
 
 ---
 
 ## 🧠 Future Improvements
 
-| Feature | Status |
-|--------|--------|
-| Payment Gateway (SSLCommerz/Stripe) | Planned |
-| Order Tracking System | Planned |
-| Email Notification System | Planned |
-| Redis Cache | Planned |
-| Docker Deployment | Planned |
-| CI/CD Pipeline | Planned |
+* Payment Gateway Integration (SSLCommerz / Stripe)
+* Order Tracking System
+* Redis Cache
+* CI/CD Pipeline
+* Background Task Processing (Celery)
 
 ---
 
 ## 👨‍💻 Author
 
-| Name | Role |
-|------|------|
-| Almas Hossen | Backend Developer (FastAPI) |
+**Almas Hossen**
+
+Backend Developer (FastAPI)
 
 ---
 
-## ⭐ Note
+## ⭐ Project Status
 
-| Info | Description |
-|------|-------------|
-| Project Type | Learning + Production-ready backend |
-| Status | Actively improving step-by-step |
-Copy `.env.example` to `.env` and update values.
+Actively maintained and continuously improved.
+
+This project is being developed to demonstrate real-world backend development skills using FastAPI and PostgreSQL.

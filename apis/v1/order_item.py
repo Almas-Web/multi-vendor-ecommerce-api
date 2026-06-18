@@ -17,9 +17,7 @@ from apis.v1.user import get_current_user
 router = APIRouter()
 
 
-# =========================
 # CREATE ORDER ITEM
-# =========================
 @router.post("", response_model=OrderItemRead)
 def create_order_item(
     payload: OrderItemCreate,
@@ -33,9 +31,7 @@ def create_order_item(
     return new_item
 
 
-# =========================
 # GET ORDER ITEMS
-# =========================
 @router.get("")
 def get_order_items(
     skip: int = 0,
@@ -52,9 +48,7 @@ def get_order_items(
     return items
 
 
-# =========================
 # GET SINGLE ORDER ITEM
-# =========================
 @router.get("/{item_id}", response_model=OrderItemRead)
 def get_order_item(
     item_id: int,
@@ -73,9 +67,7 @@ def get_order_item(
     return item
 
 
-# =========================
 # UPDATE ORDER ITEM
-# =========================
 @router.put("/{item_id}")
 def update_order_item(
     item_id: int,
@@ -95,9 +87,7 @@ def update_order_item(
     }
 
 
-# =========================
 # DELETE ORDER ITEM
-# =========================
 @router.delete("/{item_id}")
 def delete_order_item(
     item_id: int,

@@ -30,9 +30,8 @@ class Order(Base):
 
     total_price = Column(Float, default=0)
 
-    # =========================
+
     # SHIPPING SNAPSHOT
-    # =========================
     shipping_full_name = Column(String, nullable=True)
     shipping_phone = Column(String, nullable=True)
     shipping_address = Column(String, nullable=True)
@@ -41,9 +40,7 @@ class Order(Base):
     shipping_postal_code = Column(String, nullable=True)
     shipping_country = Column(String, nullable=True)
 
-    # =========================
     # RELATIONS
-    # =========================
     user = relationship(
         "User",
         back_populates="orders"

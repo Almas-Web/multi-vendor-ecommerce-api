@@ -7,9 +7,7 @@ from utils.deps import get_current_user
 router = APIRouter()
 
 
-# =========================================================
-# 🔐 PROTECTED ROUTE - CURRENT USER PROFILE
-# =========================================================
+#  PROTECTED ROUTE - CURRENT USER PROFILE
 @router.get("/me")
 def get_my_profile(
     current_user: User = Depends(get_current_user)

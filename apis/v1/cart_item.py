@@ -13,9 +13,7 @@ from apis.v1.user import get_current_user
 router = APIRouter()
 
 
-# =========================
 # ADD ITEM (OWNERSHIP FIXED)
-# =========================
 @router.post("", response_model=CartItemRead)
 def add_item(
     payload: CartItemCreate,
@@ -23,7 +21,7 @@ def add_item(
     current_user: User = Depends(get_current_user)
 ):
 
-    # 🔥 OWNERSHIP CHECK
+    # OWNERSHIP CHECK
     cart = db.query(Cart).filter(
         Cart.id == payload.cart_id,
         Cart.user_id == current_user.id,
@@ -37,9 +35,7 @@ def add_item(
     return repo.add_item(payload)
 
 
-# =========================
 # GET ITEMS (OWN CART ONLY)
-# =========================
 @router.get("/cart/{cart_id}")
 def get_items_by_cart(
     cart_id: int,
@@ -59,9 +55,7 @@ def get_items_by_cart(
     return repo.get_items_by_cart(cart_id=cart_id)
 
 
-# =========================
 # UPDATE ITEM (SAFE)
-# =========================
 @router.put("/{item_id}")
 def update_item(
     item_id: int,
@@ -85,9 +79,7 @@ def update_item(
     return {"success": True}
 
 
-# =========================
 # DELETE ITEM (SAFE)
-# =========================
 @router.delete("/{item_id}")
 def delete_item(
     item_id: int,

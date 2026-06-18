@@ -13,9 +13,7 @@ from apis.v1.user import get_current_user
 router = APIRouter()
 
 
-# =========================
 # CREATE / GET OR CREATE CART
-# =========================
 @router.post("", response_model=CartRead)
 def create_cart(
     db: Session = Depends(get_db),
@@ -29,9 +27,7 @@ def create_cart(
     return cart
 
 
-# =========================
 # GET MY CART
-# =========================
 @router.get("/me", response_model=CartRead)
 def get_my_cart(
     db: Session = Depends(get_db),
@@ -50,9 +46,7 @@ def get_my_cart(
     return cart
 
 
-# =========================
 # GET ALL CARTS (ADMIN ONLY)
-# =========================
 @router.get("", response_model=CartPagination)
 def get_carts(
     skip: int = 0,
@@ -73,9 +67,7 @@ def get_carts(
     return cart_repo.get_carts(skip=skip, limit=limit)
 
 
-# =========================
 # UPDATE CART
-# =========================
 @router.put("/{cart_id}")
 def update_cart(
     cart_id: int,
@@ -113,9 +105,7 @@ def update_cart(
     }
 
 
-# =========================
 # DELETE CART
-# =========================
 @router.delete("/{cart_id}")
 def delete_cart(
     cart_id: int,

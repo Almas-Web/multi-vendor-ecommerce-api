@@ -26,12 +26,12 @@ class CartItem(Base):
 
     quantity = Column(Integer, default=1)
 
-    # 🔥 STORE PRODUCT PRICE SNAPSHOT
+    #  STORE PRODUCT PRICE SNAPSHOT
     price = Column(Float, nullable=False, default=0)
 
-    # =========================
+
     # RELATIONSHIPS
-    # =========================
+
     product = relationship(
         "Product",
         back_populates="cart_items"
